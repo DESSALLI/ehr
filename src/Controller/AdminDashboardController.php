@@ -30,4 +30,13 @@ class AdminDashboardController extends AbstractController
             'auths' => $authaurisationRepository->findAll(),
         ]);
     }
+
+    /**
+     * @Route("/admin/request/validation/{id}-{val}", name="app_admin_doctor_requests_val")
+     */
+    public function DoctorRequestValidation($id,$val, AuthaurisationRepository $authaurisationRepository){
+      $auth = $authaurisationRepository->find($id);
+      $auth->setStatus($val);
+      $authaurisationRepository->add($auth, true);
+    }
 }
