@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Doctor Request list
+{% endblock %}
+{% block body %}
+    <h1>
+        Patients index
+                            
+                    
+            
+    </h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Id  
+                </th>
+                <th>
+                    Status  
+                </th>
+                <th>
+                    actions              
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for auth in auths %}
+                <tr>
+                    <td>
+                        {{ auth.id }}
+                    </td>
+                    </td>
+                    <td>
+                        {{ auth.status }}
+                    </td>
+                    <td>
+                        {% if auth.status == 'pending' %}
+                            <a href="#" class="btn btn-success border-rounded">
+                                Accept                          
+                            </a>
+                            <a href="#" class="btn btn-danger border-rounded">
+                                reject                          
+                            </a>
+                  
+                        {% elseif auth.status == 'auth' %}
+                            <a href="#" class="btn btn-danger border-rounded">
+                                Block                
+                            </a>
+                        {% elseif auth.status == 'block' %}
+                            <a href="#" class="btn btn-success border-rounded">
+                                Accept                         
+                            </a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">
+                        no records found
+                                                                                            
+                                                                    
+                                            
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+   
+{% endblock %}

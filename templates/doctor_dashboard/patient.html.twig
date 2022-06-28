@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Patients list
+{% endblock %}
+{% block body %}
+    <h1>
+        Patients index
+                            
+                    
+            
+    </h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                                                                            
+                                                        
+                                    
+                </th>
+                <th>
+                    Code
+                                                                            
+                                                        
+                                    
+                </th>
+                <th>
+                    actions
+                                                                            
+                                                        
+                                    
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for patient in patients %}
+                <tr>
+                    <td>
+                        {{ patient.id }}
+                    </td>
+                    <td>
+                        {{ patient.code }}
+                    </td>
+                    <td>
+                        {% if patient.authaurisation == 'pending' %}
+                            <a href="#" class="btn btn-primary border-rounded">
+                                pending                          
+                            </a>
+                        {% elseif patient.authaurisation == 'no action' %}
+                            <a href="{{ path('request_auth', {'id' : patient.id }) }}" class="btn btn-info border-rounded">
+                                request auth                   
+                            </a>
+                        {% elseif patient.authaurisation == 'auth' %}
+                            <a href="#" class="btn btn-success border-rounded">
+                                view                
+                            </a>
+                        {% elseif patient.authaurisation == 'block' %}
+                            <a href="#" class="btn btn-danger border-rounded">
+                                Auth refused                          
+                            </a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">
+                        no records found
+                                                                                            
+                                                                    
+                                            
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('app_admin_patients_new') }}">
+        Create new
+                            
+                    
+            
+    </a>
+{% endblock %}
